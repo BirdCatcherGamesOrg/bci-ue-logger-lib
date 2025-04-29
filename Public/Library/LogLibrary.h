@@ -28,16 +28,16 @@ public:
 	 * 
 	 * @param Context is the context to format.
 	 */
-	BCICORE_API static void FormatContext(FString& OutContext, std::initializer_list<FBCICoreLogging::FContextValue> Context);
+	DLLEXPORT_API static void FormatContext(FString& OutContext, std::initializer_list<FBCICoreLogging::FContextValue> Context);
 	
 	/**
 	 * @brief LogStructured logs values to the structured logging system separate to UE_LOG's if enabled.
 	 */
-	BCICORE_API static void LogStructured(const FLogCategoryBase& LogCategory, const ELogVerbosity::Type Verbosity, const FString& File, const int32 Line, const FString& Message, std::initializer_list<FBCICoreLogging::FContextValue> Context);
+	DLLEXPORT_API static void LogStructured(const FLogCategoryBase& LogCategory, const ELogVerbosity::Type Verbosity, const FString& File, const int32 Line, const FString& Message, std::initializer_list<FBCICoreLogging::FContextValue> Context);
 	
 	/**
 	 * @brief LogStructured logs values to the structured logging system separate to UE_LOG's if enabled.
 	 */
-	BCICORE_API static void LogStructured(const FName& LogCategory, const ELogVerbosity::Type Verbosity, const FString& File, const int32 Line, const FString& Message, std::initializer_list<FBCICoreLogging::FContextValue> Context);
+	DLLEXPORT_API static void LogStructured(const FName& LogCategory, const ELogVerbosity::Type Verbosity, const FString& File, const int32 Line, const FString& Message, std::initializer_list<FBCICoreLogging::FContextValue> Context);
 
 };

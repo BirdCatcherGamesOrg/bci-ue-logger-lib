@@ -74,7 +74,8 @@ namespace FBCICoreLogging
 	constexpr bool IsStringLike_v =
 		std::is_same_v<T, FString> ||
 		std::is_same_v<T, const TCHAR*> ||
-		std::is_same_v<T, const char*>;
+		std::is_same_v<std::decay_t<T>, char*> ||
+		std::is_same_v<std::decay_t<T>, const char*>;
 
 	/**
 	 * @brief IsNumericLike_v is the type trait for a type that is a basic Unreal numeric value.
