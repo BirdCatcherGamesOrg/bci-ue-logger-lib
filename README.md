@@ -1,2 +1,3 @@
 # bci-ue-logger-lib
-Context and structured logging for Unreal
+
+https://birdcatchergamesorg.github.io/bci-docs/bci-ue-logger-lib/docs/
