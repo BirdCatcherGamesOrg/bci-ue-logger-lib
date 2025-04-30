@@ -1,5 +1,7 @@
 # BCI UE Logger Lib
 
+https://github.com/BirdCatcherGamesOrg/bci-ue-logger-lib
+
 This library provides macros for additional logging features to UE_LOG and UE_LOGFMT.
 
 * Logging with Context
