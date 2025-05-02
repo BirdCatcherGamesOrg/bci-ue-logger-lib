@@ -5,13 +5,10 @@
 #include "Library/LogLibrary.h"
 #include "Macros/SelfFilter.h"
 
-#define _BCICORELOG_STRINGIFY(x) #x
-#define _BCICORELOG_STRINGIFY_EXPAND(x) _BCICORELOG_STRINGIFY(x)
-
 #define _BCICORELOG_FORWARD(CATEGORY, VERBOSITY, MESSAGE, ...) \
 	FString ContextString; \
 	UBCICoreLogLibrary::FormatContext(ContextString, { __VA_ARGS__ }); \
-	BCICORELOG_FORWARD_TO(CATEGORY, VERBOSITY, TEXT(_BCICORELOG_SELF_FILTER __FILE__ ":[" _BCICORELOG_STRINGIFY_EXPAND(__LINE__) "]: %s - Context: %s"), *FString(MESSAGE), *ContextString);
+	BCICORELOG_FORWARD_TO(CATEGORY, VERBOSITY, TEXT(_BCICORELOG_SELF_FILTER __FILE__ ":[" STRINGIFY_MACRO(__LINE__) "]: %s - Context: %s"), *FString(MESSAGE), *ContextString);
 
 #if defined(WITH_SPDLOG)
 #define BCILOG(CATEGORY, VERBOSITY, MESSAGE, ...) \
