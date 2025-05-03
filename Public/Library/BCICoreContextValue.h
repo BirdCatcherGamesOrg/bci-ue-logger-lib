@@ -67,6 +67,22 @@ namespace FBCICoreLogging
 	template <typename T>
 	constexpr bool HasToStringMethod_v = HasToStringMethod<T>::value;
 
+
+	/**
+	 * @brief HasGetNameMethod is the base type trait when no GetName() method is found.
+	 */
+	template <typename, typename = void>
+	struct HasGetNameMethod : std::false_type {};
+
+	/**
+	 * @brief HasGetNameMethod is the type trait to evaluate if the type has a GetName() method.
+	 */
+	template <typename T>
+	struct HasGetNameMethod<T, std::void_t<decltype(std::declval<const T&>().GetName())>> : std::true_type {};
+	
+	template <typename T>
+	constexpr bool HasGetNameMethod_v = HasGetNameMethod<T>::value;
+
 	/**
 	 * @brief IsStringLike_v is the type trait for a type that's a basic Unreal string type.
 	 */
@@ -92,6 +108,7 @@ namespace FBCICoreLogging
 		static_assert(
 			FBCICoreLogging::IsStringLike_v<ValueType> ||
 			FBCICoreLogging::HasToStringMethod_v<ValueType> ||
+			FBCICoreLogging::HasGetNameMethod_v<ValueType> ||
 			FBCICoreLogging::IsNumericLike_v<ValueType>,
 			"Unsupported type: Value must be a string type, lexable, or have ToString()");
 
@@ -102,6 +119,10 @@ namespace FBCICoreLogging
 		else if constexpr (HasToStringMethod_v<ValueType>)
 		{
 			return Value.ToString();
+		}
+		else if constexpr (HasGetNameMethod_v<ValueType>)
+		{
+			return Value.GetName();
 		}
 		else if constexpr (IsNumericLike_v<ValueType>)
 		{
